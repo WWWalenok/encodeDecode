@@ -1,0 +1,50 @@
+## apt install -y g++ gcc libbsd-dev libcurl3-dev libssl-dev libcrypto++-dev libgmp-dev make cmake git
+
+cmake_minimum_required(VERSION 3.10)
+
+project(wlibkmip CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+string(TOLOWER "${CMAKE_SYSTEM_NAME}" system_name_lower)
+message("Target system: ${system_name_lower}")
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+add_compile_options(
+
+  )
+
+set(main_sources
+	src/test.cpp
+)
+
+MESSAGE(${main_sources})
+
+add_executable(test
+	${main_sources}
+)
+
+include_directories(
+include
+)
+
+if (UNIX)
+
+endif (UNIX)
+
+if(WIN32)
+
+
+
+
+  target_link_libraries(test crypto ssl pthread)
+
+endif(WIN32)
